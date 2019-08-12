@@ -1,0 +1,29 @@
+{
+  "name": "guess-mine",
+  "version": "1.0.0",
+  "description": "guess-mine",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hasemi2/guess-mine.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hasemi2/guess-mine/issues"
+  },
+  "homepage": "https://github.com/Hasemi2/guess-mine#readme",
+  "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1",
+    "pug": "^2.0.4",
+    "socket.io": "^2.2.0",
+    "soket.io": "0.0.1-security"
+  },
+  "scripts": {
+    "dev:server": "nodemon --exec babel-node src/server.js"
+  }
+}
