@@ -1,5 +1,5 @@
 import express from "express";
-import {join} from "path";
+import { join } from "path";
 import socketIO from "socket.io";
 import morgan from "morgan";
 
@@ -19,10 +19,29 @@ app.use(express.static(join(__dirname, "static")));
 //router 처리
 app.get("/", (req, res) => res.render("home"));
 
-//Socket 세팅
-const io = socketIO.listen(server);
+//Socket과 IO 서버 연결하고
+const io = socketIO.listen(server); 
 
+//연결된 소켓을 io로 가져온다
+//io.on('connection' , 콜백)은 서버와 클라이언트의 소켓이
+//연결 되어있을 때 실행됨
+
+//파라미터 socket은 방금 접속한 소켓이고
 io.on("connection", (socket) => {
-    socket.emit("hello");    
+    //socket.emit("hello"); //hello 라는이벤트를 보낸다
+    //console.log("socket Request ======> " , socket);
+    console.log("Socket Connected Id===> " , socket.id);
+    //여러 클라이언트들에게 메세지를 보내야댐
+    // setTimeout(()=> {
+    //     socket.broadcast.emit("hello")
+    // },  5000);
+
+    socket.on("clientSendEvent" , () => {
+        console.log("ServerRespose")
+    });
+
 });
 
+
+
+ 
