@@ -30,30 +30,26 @@ const io = socketIO.listen(server);
 let ids = [];
 
 io.on("connection", (socket) => {
-
     addSocketIds(socket.id);
     console.log("접속 소켓 아이디 => ", ids);
 
-   // socket.emit("hello");
+    /**
+     * on : 클라이언트로부터의 메세지 수신
+     */
+    socket.on("newMessage", ({ message }) => {
 
-    //여러 클라이언트들에게 메세지를 보내야댐
-    //emit과 broadcast는 기본적으로 이벤트를 보내지만
-    //broadcast는 현재 연결된 소켓을 제외한 나머지에게
-    //이벤트를 전달한다.
-    //클라이언트가 이벤트를 response 할 준비가 되어야
-    //서버에서 이벤트를 보낼 수 있음
-
-    socket.on("getNickName", (data) => {
-        socket.broadcast.emit("newUserNoti", data);
+        socket.broadcast.emit("MessageNotif", {
+            message,
+            nickname: socket.nickname || "Anon"
+        });
     });
 
-    socket.on("newMessage", (data) => {
-        console.log("newMessage ", data);
-        socket.broadcast.emit("MessageNotif", data);
+    socket.on("setNickname", ({ nickname }) => {
+        socket.nickname = nickname;
     });
-
 
 });
+
 
 const addSocketIds = (id) => {
     ids.push(id);
