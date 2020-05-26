@@ -34,7 +34,10 @@ io.on("connection", (socket) => {
     console.log("접속 소켓 아이디 => ", ids);
 
     /**
-     * on : 클라이언트로부터의 메세지 수신
+     * on : 수신,
+     * emit:전송,
+     * broadcast : 현재 이벤트를 전송한 소켓을 제외한 나머지에게 전송,
+     * 
      */
     socket.on("newMessage", ({ message }) => {
 
